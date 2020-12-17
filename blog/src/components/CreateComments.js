@@ -1,19 +1,16 @@
 import React, { useState } from 'react'
 import axios from '../API'
 import styled from '@emotion/styled'
+import GetComments from './GetComments'
 
 const Container = styled.form`
-  width: 60%;
+  width: 100%;
   margin: auto;
-  padding: 35px 0 35px 0;
+  margin-top: 25px;
+  padding: 0 0 35px 0;
   display: flex;
   flex-direction: column;
-`
-const Input = styled.input`
-  padding: 10px;
-  margin-bottom: 30px;
-  border: 0.5rem solid #fb9a74;
-  outline: none;
+  border-top: 2px solid #fb9a74;
 `
 const TextArea = styled.textarea`
   padding: 10px;
@@ -21,7 +18,6 @@ const TextArea = styled.textarea`
   border: 0.5rem solid #fb9a74;
   outline: none;
 `
-
 const Button = styled.button`
   padding: 15px 32px;
   cursor: pointer;
@@ -46,46 +42,41 @@ const Button = styled.button`
   }
 `
 
-const CreatePost = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+const CreateComments = ({ id, func }) => {
+  const [content, setContent] = useState([])
+  const [comment, setComment] = useState([])
 
-  const createPost = async () => {
+  const commentPost = async () => {
     try {
-      await axios.post('http://51.15.227.115/posts', {
-        title,
+      await axios.post(`http://51.15.227.115/posts/${id}/comments`, {
         content,
       })
-      console.log('post crée')
+      func()
+      console.log('commentaire crée')
     } catch (error) {
-      console.log(error)
+      console.warn(error)
     }
   }
+
   return (
     <Container
       onSubmit={(e) => {
         e.preventDefault()
-        createPost()
+        commentPost()
       }}
     >
-      <Input
-        type='text'
-        placeholder="What\'s your juicy title"
-        value={title}
-        required
-        onChange={(e) => setTitle(e.target.value)}
-      />
       <TextArea
         type='text'
-        placeholder='Content'
-        rows='25'
+        rows='10'
         required
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-      />
-      <Button type='submit'>Submit post</Button>
+        placeholder='Comments'
+        onChange={(e) => {
+          setContent(e.target.value)
+        }}
+      ></TextArea>
+      <Button type='submit'>Ajouter commentaire</Button>
     </Container>
   )
 }
 
-export default CreatePost
+export default CreateComments

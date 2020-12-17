@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from '@emotion/styled'
 import { css } from '@emotion/css'
 
 const Nav = styled.nav`
   display: flex;
-  border-bottom: 1px grey solid;
+  box-shadow: 0 5px 20px -10px #fb9a74;
 `
 const Title = styled.h1`
   font-weight: bold;
@@ -33,23 +33,50 @@ const NavBar = () => {
   return (
     <Nav>
       <Title>
-        <Link
-          to='/'
+        <NavLink
+          activeClassName='selected'
           className={css`
             text-decoration: none;
-            color: #04d;
+            color: #c62f4f;
             &:hover {
-              color: hotpink;
+              color: #5c1f55;
+              font-weight: bold;
             }
           `}
+          activeStyle={{
+            textTransform: 'uppercase',
+            fontWeight: 'bold',
+            color: '#5c1f55',
+          }}
+          to='/'
         >
           SUPDEVINCI
-        </Link>
+        </NavLink>
       </Title>
       <List>
         {list.map((item) => (
           <ListItems key={item.name}>
-            <Link to={item.path}>{item.name}</Link>
+            <NavLink
+              activeClassName='selected'
+              className={css`
+                text-decoration: none;
+                color: #c62f4f;
+                font-size: 1.2em;
+                &:hover {
+                  text-transform: uppercase;
+                  font-weight: bold;
+                  color: #5c1f55;
+                }
+              `}
+              to={item.path}
+              activeStyle={{
+                textTransform: 'uppercase',
+                fontWeight: 'bold',
+                color: '#5c1f55',
+              }}
+            >
+              {item.name}
+            </NavLink>
           </ListItems>
         ))}
       </List>

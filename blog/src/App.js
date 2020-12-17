@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import NavBar from './components/NavBar'
 import Main from './components/Main'
 import Footer from './components/Footer'
+import { css } from '@emotion/css'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 function App () {
@@ -10,7 +10,12 @@ function App () {
     <div className='App'>
       <Router>
         <NavBar />
-        <Main />
+        <Main
+          className={css`
+            height: 100%;
+            flex-grow: 1;
+          `}
+        />
         <Footer />
       </Router>
     </div>
