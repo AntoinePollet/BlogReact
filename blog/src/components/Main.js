@@ -7,6 +7,7 @@ import Author from './Author'
 import Contact from './Contact'
 import CreatePost from './CreatePost'
 import Post from './Post'
+import Copyright from './Copyright'
 
 const Main = () => {
   return (
@@ -31,6 +32,9 @@ const Main = () => {
       </Route>
       <Route path='/contactus'>
         <Contact />
+      </Route>
+      <Route path='/copyright'>
+        <Copyright />
       </Route>
     </Switch>
   )

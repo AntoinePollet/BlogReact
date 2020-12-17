@@ -113,7 +113,7 @@ const Author = () => {
                 >
                   {item.title}
                 </Link>
-                <Button onClick={() => deletePost(item.id)}>Delete Post</Button>
+                {item.author === 23 && <Button onClick={() => deletePost(item.id)}>Delete Post</Button>}
               </ListItems>
             ))}
           </ContainerSecond>

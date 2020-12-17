@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import axios from '../API'
+import { toast } from 'react-toastify'
 
 const Container = styled.div`
   margin-bottom: 35px;
+  padding-bottom: 20px;
   border-bottom: 2px solid #fb9a74;
 `
 const Title = styled.h1`
@@ -40,6 +42,9 @@ const Button = styled.button`
 `
 
 const GetComments = ({ id, func, isLoaded, comment, count }) => {
+  const notifySuccess = () => toast.success('commentaire supprimé', { position: 'bottom-right' })
+  const notifyWarn = () => toast.warn('Erreur !! ', { position: 'bottom-right' })
+
   const deleteComment = async (commentId) => {
     try {
       await axios.delete(`https://supdevinci.nine1000.tech/posts/${id}/comments/${commentId}`)
@@ -62,7 +67,20 @@ const GetComments = ({ id, func, isLoaded, comment, count }) => {
         {comment.map((item) => (
           <ContainerText key={item.id}>
             {item.content}
-            {item.author === 23 && <Button onClick={() => deleteComment(item.id)}>delete</Button>}
+            {item.author === 23 && (
+              <Button
+                onClick={() => {
+                  try {
+                    deleteComment(item.id)
+                    notifySuccess()
+                  } catch (error) {
+                    notifyWarn()
+                  }
+                }}
+              >
+                delete
+              </Button>
+            )}
           </ContainerText>
         ))}
       </Container>

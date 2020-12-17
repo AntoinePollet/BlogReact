@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from '../API'
 import styled from '@emotion/styled'
+import { toast } from 'react-toastify'
 
 const Container = styled.form`
   width: 100%;
@@ -9,7 +10,6 @@ const Container = styled.form`
   padding: 0 0 35px 0;
   display: flex;
   flex-direction: column;
-  border-top: 2px solid #fb9a74;
 `
 const TextArea = styled.textarea`
   padding: 10px;
@@ -37,12 +37,13 @@ const Button = styled.button`
   &:focus {
     border: 2px solid #0d0628;
     outline: none;
-    background-color: #0d0628;
   }
 `
 
 const CreateComments = ({ id, func }) => {
   const [content, setContent] = useState([])
+  const notifySuccess = () => toast.success('commentaire publié', { position: 'bottom-right' })
+  const notifyWarn = () => toast.warn('Erreur !! ', { position: 'bottom-right' })
 
   const commentPost = async () => {
     try {
@@ -50,7 +51,6 @@ const CreateComments = ({ id, func }) => {
         content,
       })
       func()
-      console.log('commentaire crée')
     } catch (error) {
       console.warn(error)
     }
@@ -60,7 +60,14 @@ const CreateComments = ({ id, func }) => {
     <Container
       onSubmit={(e) => {
         e.preventDefault()
-        commentPost()
+        try {
+          commentPost()
+          notifySuccess()
+          setContent((e.target.value = ''))
+          console.log(content)
+        } catch (error) {
+          notifyWarn()
+        }
       }}
     >
       <TextArea

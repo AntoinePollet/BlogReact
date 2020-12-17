@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from '../API'
 import styled from '@emotion/styled'
+import { toast } from 'react-toastify'
 
 const Container = styled.form`
   width: 60%;
@@ -42,12 +43,13 @@ const Button = styled.button`
   &:focus {
     border: 2px solid #0d0628;
     outline: none;
-    background-color: #0d0628;
   }
 `
 const CreatePost = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const notifySuccess = () => toast.success('post crée', { position: 'bottom-right' })
+  const notifyWarn = () => toast.warn('Erreur !! ', { position: 'bottom-right' })
 
   const createPost = async () => {
     try {
@@ -64,7 +66,12 @@ const CreatePost = () => {
     <Container
       onSubmit={(e) => {
         e.preventDefault()
-        createPost()
+        try {
+          createPost()
+          notifySuccess()
+        } catch (error) {
+          notifyWarn()
+        }
       }}
     >
       <Input
