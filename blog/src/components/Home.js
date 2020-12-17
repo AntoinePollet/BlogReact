@@ -15,7 +15,7 @@ const Home = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     ;(async () => {
-      await axios.get('http://51.15.227.115/posts?limit=100').then(
+      await axios.get('https://supdevinci.nine1000.tech/posts?limit=100').then(
         (result) => {
           setIsLoaded(true)
           setItems(result.data.result)

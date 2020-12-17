@@ -17,7 +17,7 @@ const Authors = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   useEffect(() => {
     ;(async () => {
-      await fetch('http://51.15.227.115/authors?limit=24')
+      await fetch('https://supdevinci.nine1000.tech/authors?limit=24')
         .then((res) => res.json())
         .then(
           (result) => {

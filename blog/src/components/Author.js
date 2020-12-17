@@ -55,7 +55,7 @@ const Author = () => {
   const deletePost = async (postId) => {
     try {
       const posts = items.filter((item) => item.id !== parseInt(postId))
-      await axios.delete(`http://51.15.227.115/posts/${postId}`)
+      await axios.delete(`https://supdevinci.nine1000.tech/posts/${postId}`)
       setItems(posts)
     } catch (error) {
       console.log(error)
@@ -64,7 +64,7 @@ const Author = () => {
 
   useEffect(() => {
     ;(async () => {
-      await fetch(`http://51.15.227.115/authors/${id}`)
+      await fetch(`https://supdevinci.nine1000.tech/authors/${id}`)
         .then((res) => res.json())
         .then(
           (result) => {
@@ -75,7 +75,7 @@ const Author = () => {
             setIsLoadedAuthor(true)
           },
         )
-      await axios.get('http://51.15.227.115/posts?limit=100').then(
+      await axios.get('https://supdevinci.nine1000.tech/posts?limit=100').then(
         (result) => {
           const posts = result.data.result.filter((item) => item.author === parseInt(id))
           setIsLoaded(true)
@@ -86,7 +86,7 @@ const Author = () => {
         },
       )
     })()
-  }, [])
+  }, [id])
 
   if (!loaded) {
     return <div>{id}</div>

@@ -45,14 +45,13 @@ const Button = styled.button`
     background-color: #0d0628;
   }
 `
-
 const CreatePost = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
   const createPost = async () => {
     try {
-      await axios.post('http://51.15.227.115/posts', {
+      await axios.post('https://supdevinci.nine1000.tech/posts', {
         title,
         content,
       })

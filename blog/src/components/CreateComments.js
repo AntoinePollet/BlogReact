@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import axios from '../API'
 import styled from '@emotion/styled'
-import GetComments from './GetComments'
 
 const Container = styled.form`
   width: 100%;
@@ -44,11 +43,10 @@ const Button = styled.button`
 
 const CreateComments = ({ id, func }) => {
   const [content, setContent] = useState([])
-  const [comment, setComment] = useState([])
 
   const commentPost = async () => {
     try {
-      await axios.post(`http://51.15.227.115/posts/${id}/comments`, {
+      await axios.post(`https://supdevinci.nine1000.tech/posts/${id}/comments`, {
         content,
       })
       func()

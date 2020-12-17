@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useParams } from 'react'
+import React, { useEffect } from 'react'
 import styled from '@emotion/styled'
 import axios from '../API'
 
@@ -39,10 +39,10 @@ const Button = styled.button`
   }
 `
 
-const GetComments = ({ id, func, isLoaded, comment }) => {
+const GetComments = ({ id, func, isLoaded, comment, count }) => {
   const deleteComment = async (commentId) => {
     try {
-      await axios.delete(`http://51.15.227.115/posts/${id}/comments/${commentId}`)
+      await axios.delete(`https://supdevinci.nine1000.tech/posts/${id}/comments/${commentId}`)
       func()
     } catch (error) {
       console.log(error)
@@ -58,7 +58,7 @@ const GetComments = ({ id, func, isLoaded, comment }) => {
   } else {
     return (
       <Container>
-        <Title>Comments</Title>
+        <Title>{count} - Comments</Title>
         {comment.map((item) => (
           <ContainerText key={item.id}>
             {item.content}
