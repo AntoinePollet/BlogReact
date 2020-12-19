@@ -9,6 +9,9 @@ const Container = styled.div`
   margin: auto;
   padding: 35px 0 35px 0;
 `
+const Title = styled.h1`
+  text-align: center;
+`
 
 const Home = () => {
   const [items, setItems] = useState([])
@@ -32,6 +35,7 @@ const Home = () => {
   } else {
     return (
       <Container>
+        <Title>Articles</Title>
         {items.map((item) => (
           <p key={item.id}>
             <Link

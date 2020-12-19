@@ -8,6 +8,7 @@ import Contact from './Contact'
 import CreatePost from './CreatePost'
 import Post from './Post'
 import Copyright from './Copyright'
+import GetComment from './GetComment'
 
 const Main = () => {
   return (
@@ -15,9 +16,10 @@ const Main = () => {
       <Route exact path='/'>
         <Home />
       </Route>
-      <Route path='/post/:id'>
+      <Route exact path='/post/:id'>
         <Post />
       </Route>
+      <Route exact path='/post/:id/comments/:commentId' component={GetComment} />
       <Route path='/about'>
         <About />
       </Route>

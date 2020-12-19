@@ -10,6 +10,9 @@ const Container = styled.form`
   display: flex;
   flex-direction: column;
 `
+const Title = styled.h1`
+  text-align: center;
+`
 const Input = styled.input`
   padding: 10px;
   margin-bottom: 30px;
@@ -57,7 +60,6 @@ const CreatePost = () => {
         title,
         content,
       })
-      console.log('post crée')
     } catch (error) {
       console.log(error)
     }
@@ -68,12 +70,15 @@ const CreatePost = () => {
         e.preventDefault()
         try {
           createPost()
+          setTitle('')
+          setContent('')
           notifySuccess()
         } catch (error) {
           notifyWarn()
         }
       }}
     >
+      <Title>Create Post</Title>
       <Input
         type='text'
         placeholder="What\'s your juicy title"

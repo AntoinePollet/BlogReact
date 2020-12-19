@@ -11,10 +11,14 @@ const Container = styled.div`
   margin: auto;
   padding: 35px 0 35px 0;
 `
+const Title = styled.h1`
+  text-align: center;
+`
 
 const Authors = () => {
   const [items, setItems] = useState([])
   const [isLoaded, setIsLoaded] = useState(false)
+
   useEffect(() => {
     ;(async () => {
       await fetch('https://supdevinci.nine1000.tech/authors?limit=24')
@@ -36,6 +40,7 @@ const Authors = () => {
   } else {
     return (
       <Container>
+        <Title>Authors</Title>
         <List>
           {items.map((item) => (
             <li key={item.id}>

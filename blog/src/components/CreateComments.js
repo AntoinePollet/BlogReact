@@ -41,7 +41,7 @@ const Button = styled.button`
 `
 
 const CreateComments = ({ id, func }) => {
-  const [content, setContent] = useState([])
+  const [content, setContent] = useState('')
   const notifySuccess = () => toast.success('commentaire publié', { position: 'bottom-right' })
   const notifyWarn = () => toast.warn('Erreur !! ', { position: 'bottom-right' })
 
@@ -63,8 +63,7 @@ const CreateComments = ({ id, func }) => {
         try {
           commentPost()
           notifySuccess()
-          setContent((e.target.value = ''))
-          console.log(content)
+          setContent('')
         } catch (error) {
           notifyWarn()
         }
@@ -73,6 +72,7 @@ const CreateComments = ({ id, func }) => {
       <TextArea
         type='text'
         rows='10'
+        value={content}
         required
         placeholder='Comments'
         onChange={(e) => {

@@ -22,9 +22,9 @@ const Post = () => {
   const [count, setCount] = useState(0)
   const [isLoadedComment, setIsLoadedComment] = useState(false)
 
-  const getComment = async () => {
+  const getComments = async () => {
     await axios
-      .get(`https://supdevinci.nine1000.tech/posts/${id}/comments`)
+      .get(`https://supdevinci.nine1000.tech/posts/${id}/comments?limit=100`)
       .then((result) => {
         setComment(result.data.result)
         setCount(result.data.count)
@@ -58,8 +58,16 @@ const Post = () => {
           <ReactMarkdown>{items.content}</ReactMarkdown>
         </div>
         <div>
-          <GetComments id={id} func={getComment} isLoaded={isLoadedComment} comment={comment} count={count} />
-          <CreateComments id={id} func={getComment} />
+          <GetComments
+            author={items.author}
+            id={id}
+            func={getComments}
+            isLoaded={isLoadedComment}
+            comment={comment}
+            count={count}
+            setComment={setComment}
+          />
+          <CreateComments id={id} func={getComments} />
         </div>
       </Container>
     )
